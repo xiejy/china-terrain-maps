@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chinamaps"
+version = "0.1.0"
+description = "Vivid terrain renders, an interactive 3D web map, and 3D city models of China"
+requires-python = ">=3.13"
+license = "MIT"
+dependencies = [
+  "numpy==2.4.4",
+  "rasterio==1.5.2",
+  "pyproj==3.8.0",
+  "shapely==2.2.0",
+  "pyogrio==0.13.0",
+  "geopandas==1.2.0",
+  "matplotlib==3.11.2",
+  "scipy==1.18.1",
+  "texshade==2.0",
+  "pillow",
+  "requests",
+  "tqdm",
+  "pyyaml",
+  "pyarrow==26.0.0",
+  "trimesh==5.1.1",
+  "mapbox-earcut==2.1.0",
+  "pygltflib==1.16.5",
+  "tippecanoe==2.72.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+chinamaps = "chinamaps.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["network: test needs outbound network access"]
