@@ -1,0 +1,72 @@
+# Hypsometric colour stops: [elevation_m, R, G, B].
+# Land: Patterson & Jenny cross-blended hypsometric tints (via tidyterra
+# data-raw/cross_blended_hypsometric_tints_db.R). Stops above 1000 m are shared;
+# lowland colours vary by climate and are blended with a smoothed regional mask.
+land:
+  shared_high:
+    - [7000, 245, 245, 245]
+    - [6000, 235, 235, 237]
+    - [5000, 220, 220, 220]
+    - [4000, 212, 207, 204]
+    - [3000, 212, 193, 179]
+    - [2000, 212, 184, 163]
+    - [1000, 212, 201, 180]
+  arid:
+    - [600, 202, 190, 174]
+    - [200, 180, 170, 158]
+    - [50, 170, 160, 150]
+    - [0, 160, 152, 141]
+    - [-400, 146, 136, 129]
+  warm_humid:
+    - [600, 169, 192, 166]
+    - [200, 134, 184, 159]
+    - [50, 120, 172, 149]
+    - [0, 114, 164, 141]
+    - [-400, 106, 153, 135]
+  cold_humid:
+    - [600, 180, 192, 180]
+    - [200, 145, 177, 171]
+    - [50, 130, 165, 159]
+    - [0, 120, 159, 152]
+    - [-400, 112, 147, 141]
+
+# Climate regions used to build blend weights (lon/lat polygons, coarse on
+# purpose: the mask is Gaussian-smoothed with sigma ~150 km). Anything not
+# covered falls back to cold_humid.
+climate_regions:
+  arid:
+    # Xinjiang, Hexi Corridor, Qaidam, western Inner Mongolia, Ordos, Mongolia's Gobi
+    - [[73, 35], [73, 49], [96, 50], [112, 45], [112, 38], [104, 36], [97, 36], [90, 35.5], [80, 35]]
+  warm_humid:
+    # south of the Qinling-Huaihe line, Sichuan Basin, Yunnan, south China, Taiwan
+    - [[97, 21], [97, 29], [103, 32.5], [110, 33.5], [121, 33.5], [123, 30], [123, 21], [110, 17], [100, 18]]
+
+# Ocean depth ramp [depth_m (negative), R, G, B]; muted so the land reads first.
+ocean:
+  - [0, 175, 205, 222]
+  - [-50, 160, 194, 214]
+  - [-200, 132, 172, 199]
+  - [-1000, 98, 140, 172]
+  - [-3000, 70, 108, 142]
+  - [-6000, 48, 78, 110]
+  - [-11000, 32, 52, 80]
+
+# Neighbouring countries are drawn with land colours mixed toward this grey.
+neighbour_mix: {color: [196, 196, 192], amount: 0.45}
+
+# Web map colour-relief stops (MapLibre color-relief, elevation in metres).
+web_color_relief:
+  - [-8000, "#203450"]
+  - [-3000, "#3f6a8c"]
+  - [-200, "#7fa8c4"]
+  - [-1, "#afcdde"]
+  - [0, "#78a48d"]
+  - [200, "#93b79f"]
+  - [600, "#b3c3a4"]
+  - [1000, "#d4c9b4"]
+  - [2000, "#d4b8a3"]
+  - [3000, "#d4c1b3"]
+  - [4000, "#d4cfcc"]
+  - [5000, "#dcdcdc"]
+  - [6000, "#ebebed"]
+  - [7000, "#f5f5f5"]

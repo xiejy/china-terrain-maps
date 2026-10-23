@@ -1,0 +1,34 @@
+# 3D city presets. bbox: [lon_min, lat_min, lon_max, lat_max] (WGS84).
+# epsg: metric working CRS. gba_tile: GlobalBuildingAtlas LoD1 parquet tile.
+# s2_mgrs: Sentinel-2 quarterly mosaic tile id(s) covering the bbox (null =
+# resolve via bucket listing).
+defaults:
+  terrain_res: 5            # m, ground mesh grid spacing
+  texture_res: 2            # m/px, ground texture
+  floor_height: 3.2         # m per floor when only num_floors is known
+  gba_min_overlap: 0.5      # min footprint overlap fraction for a GBA height match
+  default_heights: {residential: 18, commercial: 24, industrial: 12, default: 12, small_area_m2: 60, small: 6}
+
+cities:
+  chongqing-yuzhong:
+    title: {zh: 重庆渝中半岛, en: Chongqing, Yuzhong Peninsula}
+    bbox: [106.53, 29.53, 106.61, 29.59]
+    epsg: 32648
+    gba_tile: e105_n30_e110_n25.parquet
+    s2_mgrs: [48RXT]
+    landmarks:
+      - {name: Raffles City Chongqing, lon: 106.5866, lat: 29.5655}
+      - {name: Chongqing World Financial Center, lon: 106.5767, lat: 29.5594}
+    camera: {azimuth: 225, elevation: 32, focal_mm: 35, distance: 0.9}
+    sun: {azimuth: 250, elevation: 18, strength: 4.0, angle: 0.8}
+  hongkong-victoria-harbour:
+    title: {zh: 香港维多利亚港, en: Hong Kong, Victoria Harbour}
+    bbox: [114.14, 22.27, 114.19, 22.315]
+    epsg: 32650
+    gba_tile: e110_n25_e115_n20.parquet
+    s2_mgrs: null
+    landmarks:
+      - {name: International Commerce Centre, lon: 114.1603, lat: 22.3033}
+      - {name: Two International Finance Centre, lon: 114.1588, lat: 22.2851}
+    camera: {azimuth: 345, elevation: 28, focal_mm: 35, distance: 0.9}
+    sun: {azimuth: 240, elevation: 20, strength: 4.0, angle: 0.8}

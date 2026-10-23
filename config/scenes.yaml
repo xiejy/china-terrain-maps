@@ -1,0 +1,75 @@
+# Oblique 3D render scenes (Blender Cycles). See docs/ARCHITECTURE.md for the
+# output contract consumed by blender/render_scene.py.
+#
+# bounds: [lon_min, lat_min, lon_max, lat_max] WGS84 area to fetch and frame.
+# crs: working projection (metres). dem: which DEM product to read.
+#   glo30      -> Copernicus GLO-30 full resolution (1")
+#   glo30-ovr2 -> GLO-30 overview level 2 (8", ~240 m)
+#   glo90      -> Copernicus GLO-90 full resolution (3")
+# dem_res / texture_res: output pixel size in metres.
+# camera.azimuth: compass bearing FROM the scene centre TO the camera (deg).
+# camera.elevation: degrees above horizontal the camera looks down.
+# sun.azimuth: compass bearing the light comes FROM; sun.elevation in degrees.
+defaults:
+  mesh_max: 2048          # longest mesh side in vertices (Blender decimates the DEM to this)
+  draft: {width: 1600, height: 900, samples: 32}
+  final: {width: 3840, height: 2160, samples: 128}
+  sun: {strength: 4.0, angle: 1.0}
+  haze: 0.2               # mist pass mix (0 = none)
+  bathymetry: false
+  worldview: cn
+
+scenes:
+  china:
+    title: {zh: 中国地势, en: The Terrain of China}
+    bounds: [70.0, 2.0, 140.0, 56.0]
+    crs: "+proj=aea +lat_0=0 +lon_0=105 +lat_1=25 +lat_2=47 +datum=WGS84 +units=m +no_defs"
+    dem: glo30-ovr2
+    dem_res: 1000
+    texture_res: 500
+    bathymetry: true
+    exaggeration: 20
+    mesh_max: 3000
+    camera: {azimuth: 155, elevation: 34, focal_mm: 50, distance: 1.15}
+    sun: {azimuth: 285, elevation: 20, strength: 4.5, angle: 1.5}
+    haze: 0.25
+  himalaya-everest:
+    title: {zh: 珠穆朗玛峰, en: Qomolangma / Everest}
+    bounds: [86.45, 27.70, 87.30, 28.35]
+    crs: "EPSG:32645"
+    dem: glo30
+    dem_res: 30
+    texture_res: 30
+    exaggeration: 1.5
+    camera: {azimuth: 190, elevation: 26, focal_mm: 50, distance: 1.1}
+    sun: {azimuth: 235, elevation: 24, strength: 4.0, angle: 1.0}
+  hengduan-three-rivers:
+    title: {zh: 三江并流, en: Three Parallel Rivers, Hengduan Mountains}
+    bounds: [98.2, 26.6, 100.2, 28.6]
+    crs: "EPSG:32647"
+    dem: glo90
+    dem_res: 90
+    texture_res: 90
+    exaggeration: 2.5
+    camera: {azimuth: 180, elevation: 35, focal_mm: 45, distance: 1.15}
+    sun: {azimuth: 250, elevation: 22, strength: 4.0, angle: 1.0}
+  sichuan-basin-tibet-edge:
+    title: {zh: 四川盆地与青藏高原东缘, en: Sichuan Basin and the Tibetan Plateau edge}
+    bounds: [100.5, 27.5, 108.5, 33.0]
+    crs: "EPSG:32648"
+    dem: glo30-ovr2
+    dem_res: 240
+    texture_res: 240
+    exaggeration: 4
+    camera: {azimuth: 105, elevation: 30, focal_mm: 50, distance: 1.1}
+    sun: {azimuth: 260, elevation: 18, strength: 4.5, angle: 1.2}
+  guilin-karst:
+    title: {zh: 桂林山水, en: Guilin-Yangshuo karst}
+    bounds: [110.30, 24.65, 110.62, 24.95]
+    crs: "EPSG:32649"
+    dem: glo30
+    dem_res: 30
+    texture_res: 30
+    exaggeration: 2
+    camera: {azimuth: 150, elevation: 22, focal_mm: 40, distance: 1.0}
+    sun: {azimuth: 255, elevation: 20, strength: 4.0, angle: 1.0}
