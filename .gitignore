@@ -1,6 +1,6 @@
 # local caches and build outputs
-data/
-out/
+/data/
+/out/
 .venv/
 .venv-blender/
 __pycache__/
