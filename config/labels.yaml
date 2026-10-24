@@ -1,0 +1,191 @@
+# Map labels for the oblique renders (chinamaps.annotate) and the web map.
+#
+# kind: peak, range, plateau, basin, plain, desert, river, lake, sea, island, city, region
+# rank: 1 = most important (always tried first), 2 = national map, 3 = regional scenes only.
+# lon/lat: WGS84 anchor (a representative point, not the centroid of an odd shape). Taken from
+#   Natural Earth 5.1.2 (geography_regions_polys label points, elevation_points, populated_places)
+#   where they fit, else from general knowledge; `approx: true` marks the less certain ones.
+# points: extra candidate anchors [[lon, lat], ...]; the first one inside a scene is used, so long
+#   ranges get a label in the regional close-ups too. The web map labels river points as well.
+# ne_river: Natural Earth river names; the anchor snaps to the nearest point of that river inside
+#   the scene, so river labels sit on the water.
+# elevation: metres (peaks).
+# web_minzoom: first zoom on the web map (default by rank; the national web view is about z3.3, and the
+#   南海诸岛 inset there carries the South China Sea names).
+
+# Per-scene label settings (defaults: max_rank 3, scale 1.0, peak_elevations true). `small` overrides
+# them for the 1280 px README copy (gallery/<name>_small.jpg), which is re-annotated, not downsampled.
+scenes:
+  china: {max_rank: 2, scale: 0.47, peak_elevations: false, small: {max_rank: 1, scale: 0.8}}
+  himalaya-everest: {scale: 1.1}
+  hengduan-three-rivers: {scale: 1.1}
+  sichuan-basin-tibet-edge: {scale: 1.05}
+  guilin-karst: {scale: 1.15}
+
+# Chinese names for city-model landmarks (English names come from config/cities.yaml).
+landmarks:
+  Raffles City Chongqing: 重庆来福士
+  Chongqing World Financial Center: 重庆环球金融中心
+  International Commerce Centre: 环球贸易广场
+  Two International Finance Centre: 国际金融中心二期
+
+features:
+  # ---- mountain ranges ----
+  - {zh: 喜马拉雅山脉, en: Himalayas, kind: range, rank: 1, lon: 84.6, lat: 28.6, points: [[86.75, 27.82], [88.6, 27.9], [81.8, 30.0], [91.5, 27.9]]}
+  - {zh: 昆仑山脉, en: Kunlun Mountains, kind: range, rank: 1, lon: 86.3, lat: 36.3, points: [[80.2, 36.0], [82.5, 35.9], [91.5, 36.2], [95.5, 35.8]]}
+  - {zh: 天山山脉, en: Tian Shan, kind: range, rank: 1, lon: 84.5, lat: 42.7, points: [[80.6, 41.9], [82.5, 42.3], [86.8, 43.2], [88.5, 43.3], [92.0, 43.2]]}
+  - {zh: 祁连山脉, en: Qilian Mountains, kind: range, rank: 1, lon: 99.0, lat: 38.2}
+  - {zh: 秦岭, en: Qinling Mountains, kind: range, rank: 1, lon: 108.6, lat: 33.8, points: [[106.5, 33.7], [110.6, 33.9]]}
+  - {zh: 大兴安岭, en: Greater Khingan Range, kind: range, rank: 2, lon: 121.3, lat: 48.5}
+  - {zh: 横断山脉, en: Hengduan Mountains, kind: range, rank: 1, lon: 99.6, lat: 29.6, points: [[100.9, 28.4], [101.4, 29.2]]}
+  - {zh: 太行山脉, en: Taihang Mountains, kind: range, rank: 2, lon: 113.7, lat: 37.6}
+  - {zh: 唐古拉山脉, en: Tanggula Mountains, kind: range, rank: 2, lon: 92.0, lat: 32.9}
+  - {zh: 冈底斯山脉, en: Gangdise Mountains, kind: range, rank: 2, lon: 84.5, lat: 30.9, approx: true}
+  - {zh: 阴山, en: Yin Mountains, kind: range, rank: 2, lon: 110.0, lat: 41.2}
+  - {zh: 小兴安岭, en: Lesser Khingan Range, kind: range, rank: 2, lon: 128.1, lat: 49.0}
+  - {zh: 阿尔泰山, en: Altai Mountains, kind: range, rank: 2, lon: 88.6, lat: 47.9}
+  - {zh: 喀喇昆仑山脉, en: Karakoram, kind: range, rank: 2, lon: 77.4, lat: 35.5}
+  - {zh: 武夷山, en: Wuyi Mountains, kind: range, rank: 2, lon: 117.2, lat: 27.0}
+  - {zh: 南岭, en: Nanling Mountains, kind: range, rank: 2, lon: 112.4, lat: 25.0}
+  - {zh: 巫山, en: Wu Mountains, kind: range, rank: 3, lon: 110.0, lat: 31.2, approx: true}
+  - {zh: 雪峰山, en: Xuefeng Mountains, kind: range, rank: 3, lon: 110.6, lat: 27.4, approx: true}
+  - {zh: 大巴山, en: Daba Mountains, kind: range, rank: 3, lon: 108.2, lat: 32.2}
+  - {zh: 阿尔金山, en: Altun Mountains, kind: range, rank: 3, lon: 89.4, lat: 38.5}
+  - {zh: 大别山, en: Dabie Mountains, kind: range, rank: 3, lon: 115.4, lat: 31.2}
+  - {zh: 贺兰山, en: Helan Mountains, kind: range, rank: 3, lon: 105.9, lat: 38.8}
+  - {zh: 念青唐古拉山, en: Nyainqentanglha, kind: range, rank: 3, lon: 90.6, lat: 30.2, approx: true}
+  - {zh: 龙门山, en: Longmen Mountains, kind: range, rank: 3, lon: 103.7, lat: 31.3, approx: true}
+  - {zh: 邛崃山, en: Qionglai Mountains, kind: range, rank: 3, lon: 102.7, lat: 30.6, approx: true}
+  - {zh: 大凉山, en: Daliang Mountains, kind: range, rank: 3, lon: 102.9, lat: 28.1, approx: true}
+  - {zh: 岷山, en: Min Mountains, kind: range, rank: 3, lon: 103.8, lat: 32.8, approx: true}
+  - {zh: 高黎贡山, en: Gaoligong Mountains, kind: range, rank: 3, lon: 98.65, lat: 27.0, approx: true}
+  - {zh: 碧罗雪山, en: Biluo Snow Mountains, kind: range, rank: 3, lon: 98.97, lat: 27.35, approx: true}
+  - {zh: 云岭, en: Yunling Mountains, kind: range, rank: 3, lon: 99.35, lat: 27.75, approx: true}
+
+  # ---- plateaus, basins, plains, deserts ----
+  - {zh: 青藏高原, en: Tibetan Plateau, kind: plateau, rank: 1, lon: 88.5, lat: 33.2, points: [[101.0, 32.4]]}
+  - {zh: 内蒙古高原, en: Inner Mongolian Plateau, kind: plateau, rank: 1, lon: 112.5, lat: 43.2}
+  - {zh: 黄土高原, en: Loess Plateau, kind: plateau, rank: 1, lon: 108.0, lat: 36.8}
+  - {zh: 云贵高原, en: Yunnan-Guizhou Plateau, kind: plateau, rank: 1, lon: 104.5, lat: 25.6}
+  - {zh: 帕米尔高原, en: Pamirs, kind: plateau, rank: 3, lon: 74.6, lat: 38.2}
+  - {zh: 塔里木盆地, en: Tarim Basin, kind: basin, rank: 1, lon: 83.6, lat: 40.6, points: [[81.0, 39.8], [86.5, 40.2], [84.0, 38.4]]}
+  - {zh: 准噶尔盆地, en: Junggar Basin, kind: basin, rank: 1, lon: 86.3, lat: 45.3, points: [[85.0, 45.8], [88.0, 45.0]]}
+  - {zh: 柴达木盆地, en: Qaidam Basin, kind: basin, rank: 1, lon: 94.5, lat: 37.3, points: [[93.0, 37.6], [95.8, 37.0]]}
+  - {zh: 四川盆地, en: Sichuan Basin, kind: basin, rank: 1, lon: 105.3, lat: 30.2}
+  - {zh: 吐鲁番盆地, en: Turpan Basin, kind: basin, rank: 2, lon: 89.4, lat: 42.8}
+  - {zh: 东北平原, en: Northeast China Plain, kind: plain, rank: 1, lon: 124.6, lat: 45.0}
+  - {zh: 华北平原, en: North China Plain, kind: plain, rank: 1, lon: 116.4, lat: 35.6, points: [[115.6, 37.4], [116.8, 34.4]]}
+  - {zh: 长江中下游平原, en: Middle-Lower Yangtze Plain, kind: plain, rank: 2, lon: 116.6, lat: 30.9, approx: true}
+  - {zh: 成都平原, en: Chengdu Plain, kind: plain, rank: 3, lon: 103.9, lat: 30.75}
+  - {zh: 塔克拉玛干沙漠, en: Taklimakan Desert, kind: desert, rank: 2, lon: 82.8, lat: 38.6}
+  - {zh: 戈壁, en: Gobi, kind: desert, rank: 2, lon: 104.5, lat: 42.4}
+  - {zh: 巴丹吉林沙漠, en: Badain Jaran Desert, kind: desert, rank: 3, lon: 102.2, lat: 40.0}
+  - {zh: 河西走廊, en: Hexi Corridor, kind: region, rank: 2, lon: 99.7, lat: 39.7}
+  - {zh: 雅鲁藏布大峡谷, en: Yarlung Tsangpo Grand Canyon, kind: region, rank: 2, lon: 95.2, lat: 29.8, approx: true}
+  - {zh: 长江三峡, en: Three Gorges, kind: region, rank: 2, lon: 110.2, lat: 30.95}
+  - {zh: 三江并流, en: Three Parallel Rivers, kind: region, rank: 3, lon: 98.9, lat: 28.2, approx: true}
+  - {zh: 绒布冰川, en: Rongbuk Glacier, kind: region, rank: 3, lon: 86.86, lat: 28.06, approx: true}
+
+  # ---- peaks ----
+  - {zh: 珠穆朗玛峰, en: Qomolangma (Everest), kind: peak, rank: 1, lon: 86.925, lat: 27.988, elevation: 8848.86}
+  - {zh: 乔戈里峰, en: K2 (Chogori), kind: peak, rank: 1, lon: 76.513, lat: 35.881, elevation: 8611}
+  - {zh: 贡嘎山, en: Minya Konka, kind: peak, rank: 1, lon: 101.879, lat: 29.596, elevation: 7556}
+  - {zh: 梅里雪山, en: Meili Snow Mountain, kind: peak, rank: 2, lon: 98.684, lat: 28.437, elevation: 6740}
+  - {zh: 冈仁波齐, en: Mount Kailash, kind: peak, rank: 2, lon: 81.311, lat: 31.067, elevation: 6638}
+  - {zh: 南迦巴瓦峰, en: Namcha Barwa, kind: peak, rank: 1, lon: 95.059, lat: 29.630, elevation: 7782}
+  - {zh: 泰山, en: Mount Tai, kind: peak, rank: 2, lon: 117.104, lat: 36.254, elevation: 1545}
+  - {zh: 玉山, en: Yushan, kind: peak, rank: 2, lon: 120.957, lat: 23.470, elevation: 3952}
+  - {zh: 长白山, en: Changbai Mountain, kind: peak, rank: 2, lon: 128.077, lat: 42.006, elevation: 2744}
+  - {zh: 玉龙雪山, en: Jade Dragon Snow Mountain, kind: peak, rank: 3, lon: 100.18, lat: 27.10, elevation: 5596, approx: true}
+  - {zh: 华山, en: Mount Hua, kind: peak, rank: 3, lon: 110.082, lat: 34.478, elevation: 2155}
+  - {zh: 黄山, en: Mount Huangshan, kind: peak, rank: 3, lon: 118.167, lat: 30.130, elevation: 1864}
+  - {zh: 峨眉山, en: Mount Emei, kind: peak, rank: 3, lon: 103.333, lat: 29.520, elevation: 3099}
+  - {zh: 四姑娘山, en: Mount Siguniang, kind: peak, rank: 3, lon: 102.90, lat: 31.10, elevation: 6250, approx: true}
+  - {zh: 希夏邦马峰, en: Shishapangma, kind: peak, rank: 3, lon: 85.780, lat: 28.352, elevation: 8027}
+  - {zh: 慕士塔格峰, en: Muztagh Ata, kind: peak, rank: 3, lon: 75.115, lat: 38.276, elevation: 7509}
+  - {zh: 洛子峰, en: Lhotse, kind: peak, rank: 3, lon: 86.933, lat: 27.962, elevation: 8516}
+  - {zh: 卓奥友峰, en: Cho Oyu, kind: peak, rank: 3, lon: 86.661, lat: 28.094, elevation: 8188}
+  - {zh: 马卡鲁峰, en: Makalu, kind: peak, rank: 3, lon: 87.089, lat: 27.889, elevation: 8485}
+  - {zh: 努子峰, en: Nuptse, kind: peak, rank: 3, lon: 86.887, lat: 27.967, elevation: 7861}
+  - {zh: 章子峰, en: Changtse, kind: peak, rank: 3, lon: 86.929, lat: 28.024, elevation: 7543, approx: true}
+  - {zh: 普莫里峰, en: Pumori, kind: peak, rank: 3, lon: 86.828, lat: 28.015, elevation: 7161}
+  - {zh: 哈巴雪山, en: Haba Snow Mountain, kind: peak, rank: 3, lon: 100.11, lat: 27.33, elevation: 5396, approx: true}
+  - {zh: 白马雪山, en: Baima Snow Mountain, kind: peak, rank: 3, lon: 99.08, lat: 28.31, elevation: 5640, approx: true}
+  - {zh: 老君山, en: Laojun Mountain, kind: peak, rank: 3, lon: 99.617, lat: 26.873, elevation: 4500}
+
+  # ---- rivers (anchors snap onto the Natural Earth river line when ne_river is given) ----
+  - {zh: 长江, en: Yangtze River, kind: river, rank: 1, lon: 111.2, lat: 30.4, ne_river: [Chang Jiang, Yangtze]}
+  - {zh: 黄河, en: Yellow River, kind: river, rank: 1, lon: 106.6, lat: 39.1, ne_river: [Huang]}
+  - {zh: 雅鲁藏布江, en: Yarlung Tsangpo, kind: river, rank: 1, lon: 89.5, lat: 29.3, ne_river: [Yarlung, Maquan, Dihang]}
+  - {zh: 澜沧江, en: Lancang (Mekong), kind: river, rank: 2, lon: 99.3, lat: 25.5, points: [[99.15, 27.6]], ne_river: [Lancang]}
+  - {zh: 怒江, en: Nu (Salween), kind: river, rank: 2, lon: 98.85, lat: 26.3, points: [[98.8, 27.8]], ne_river: [Nu]}
+  - {zh: 金沙江, en: Jinsha River, kind: river, rank: 2, lon: 99.1, lat: 30.4, ne_river: [Jinsha]}
+  - {zh: 珠江, en: Pearl River, kind: river, rank: 2, lon: 113.0, lat: 23.1, ne_river: [Xi], approx: true}
+  - {zh: 黑龙江, en: Heilongjiang (Amur), kind: river, rank: 2, lon: 127.0, lat: 50.0, ne_river: [Heilong Jiang, Amur]}
+  - {zh: 塔里木河, en: Tarim River, kind: river, rank: 2, lon: 84.5, lat: 41.1, ne_river: [Tarim]}
+  - {zh: 松花江, en: Songhua River, kind: river, rank: 3, lon: 127.5, lat: 46.2, ne_river: [Songhua]}
+  - {zh: 大渡河, en: Dadu River, kind: river, rank: 3, lon: 102.2, lat: 29.6, ne_river: [Dadu]}
+  - {zh: 岷江, en: Min River, kind: river, rank: 3, lon: 103.75, lat: 29.9, approx: true}
+  - {zh: 嘉陵江, en: Jialing River, kind: river, rank: 3, lon: 106.3, lat: 30.6, approx: true}
+  - {zh: 漓江, en: Li River, kind: river, rank: 3, lon: 110.505, lat: 24.865, approx: true}
+  - {zh: 遇龙河, en: Yulong River, kind: river, rank: 3, lon: 110.43, lat: 24.77, approx: true}
+
+  # ---- lakes ----
+  - {zh: 青海湖, en: Qinghai Lake, kind: lake, rank: 1, lon: 100.2, lat: 36.9}
+  - {zh: 鄱阳湖, en: Poyang Lake, kind: lake, rank: 2, lon: 116.3, lat: 29.1}
+  - {zh: 洞庭湖, en: Dongting Lake, kind: lake, rank: 2, lon: 112.9, lat: 29.3}
+  - {zh: 纳木错, en: Nam Co, kind: lake, rank: 2, lon: 90.6, lat: 30.73}
+  - {zh: 太湖, en: Tai Lake, kind: lake, rank: 2, lon: 120.14, lat: 31.24}
+  - {zh: 色林错, en: Siling Co, kind: lake, rank: 3, lon: 89.0, lat: 31.8, approx: true}
+  - {zh: 滇池, en: Dian Lake, kind: lake, rank: 3, lon: 102.68, lat: 24.85}
+  - {zh: 洱海, en: Erhai Lake, kind: lake, rank: 3, lon: 100.19, lat: 25.80}
+
+  # ---- seas and the South China Sea islands ----
+  - {zh: 渤海, en: Bohai Sea, kind: sea, rank: 1, lon: 120.0, lat: 38.9}
+  - {zh: 黄海, en: Yellow Sea, kind: sea, rank: 1, lon: 123.2, lat: 35.4}
+  - {zh: 东海, en: East China Sea, kind: sea, rank: 1, lon: 125.0, lat: 29.0}
+  - {zh: 南海, en: South China Sea, kind: sea, rank: 1, lon: 116.3, lat: 19.3}
+  - {zh: 太平洋, en: Pacific Ocean, kind: sea, rank: 2, lon: 133.0, lat: 22.0}
+  - {zh: 台湾海峡, en: Taiwan Strait, kind: sea, rank: 2, lon: 119.6, lat: 24.2}
+  - {zh: 孟加拉湾, en: Bay of Bengal, kind: sea, rank: 2, lon: 88.5, lat: 15.5}
+  - {zh: 日本海, en: Sea of Japan, kind: sea, rank: 3, lon: 135.0, lat: 40.5}
+  - {zh: 南海诸岛, en: South China Sea Islands, kind: region, rank: 1, lon: 112.4, lat: 13.0, web_minzoom: 4}
+  - {zh: 西沙群岛, en: Xisha Islands, kind: island, rank: 2, lon: 112.3, lat: 16.5}
+  - {zh: 南沙群岛, en: Nansha Islands, kind: island, rank: 2, lon: 114.5, lat: 9.7}
+  - {zh: 中沙群岛, en: Zhongsha Islands, kind: island, rank: 2, lon: 114.4, lat: 15.9, approx: true}
+  - {zh: 东沙群岛, en: Dongsha Islands, kind: island, rank: 2, lon: 116.7, lat: 20.7}
+  - {zh: 黄岩岛, en: Huangyan Dao, kind: island, rank: 2, lon: 117.76, lat: 15.15}
+  - {zh: 曾母暗沙, en: Zengmu Ansha, kind: island, rank: 2, lon: 112.27, lat: 3.97}
+  - {zh: 台湾岛, en: Taiwan Island, kind: island, rank: 1, lon: 121.0, lat: 23.8, marker: false, web_minzoom: 5}
+  - {zh: 海南岛, en: Hainan Island, kind: island, rank: 2, lon: 109.7, lat: 19.2, marker: false, web_minzoom: 5}
+
+  # ---- cities ----
+  - {zh: 北京, en: Beijing, kind: city, rank: 1, lon: 116.394, lat: 39.902, capital: true}
+  - {zh: 上海, en: Shanghai, kind: city, rank: 1, lon: 121.47, lat: 31.23}
+  - {zh: 重庆, en: Chongqing, kind: city, rank: 1, lon: 106.55, lat: 29.56}
+  - {zh: 香港, en: Hong Kong, kind: city, rank: 1, lon: 114.17, lat: 22.30}
+  - {zh: 广州, en: Guangzhou, kind: city, rank: 2, lon: 113.262, lat: 23.125}
+  - {zh: 成都, en: Chengdu, kind: city, rank: 1, lon: 104.068, lat: 30.672}
+  - {zh: 拉萨, en: Lhasa, kind: city, rank: 2, lon: 91.10, lat: 29.645}
+  - {zh: 乌鲁木齐, en: Ürümqi, kind: city, rank: 2, lon: 87.573, lat: 43.807}
+  - {zh: 西安, en: Xi'an, kind: city, rank: 2, lon: 108.94, lat: 34.34}
+  - {zh: 武汉, en: Wuhan, kind: city, rank: 2, lon: 114.268, lat: 30.582}
+  - {zh: 台北, en: Taipei, kind: city, rank: 1, lon: 121.568, lat: 25.036}
+  - {zh: 昆明, en: Kunming, kind: city, rank: 2, lon: 102.697, lat: 25.043}
+  - {zh: 哈尔滨, en: Harbin, kind: city, rank: 2, lon: 126.648, lat: 45.752}
+  - {zh: 兰州, en: Lanzhou, kind: city, rank: 2, lon: 103.79, lat: 36.058}
+  - {zh: 南京, en: Nanjing, kind: city, rank: 2, lon: 118.778, lat: 32.052}
+  - {zh: 西宁, en: Xining, kind: city, rank: 2, lon: 101.768, lat: 36.622}
+  - {zh: 呼和浩特, en: Hohhot, kind: city, rank: 2, lon: 111.658, lat: 40.822}
+  - {zh: 喀什, en: Kashgar, kind: city, rank: 2, lon: 75.97, lat: 39.476}
+  - {zh: 桂林, en: Guilin, kind: city, rank: 2, lon: 110.29, lat: 25.27}
+  - {zh: 阳朔, en: Yangshuo, kind: city, rank: 3, lon: 110.49, lat: 24.78}
+  - {zh: 兴坪, en: Xingping, kind: city, rank: 3, lon: 110.52, lat: 24.92, approx: true}
+  - {zh: 丽江, en: Lijiang, kind: city, rank: 3, lon: 100.23, lat: 26.87}
+  - {zh: 香格里拉, en: Shangri-La, kind: city, rank: 3, lon: 99.70, lat: 27.83}
+  - {zh: 德钦, en: Deqin, kind: city, rank: 3, lon: 98.91, lat: 28.48}
+  - {zh: 乐山, en: Leshan, kind: city, rank: 3, lon: 103.731, lat: 29.569}
+  - {zh: 雅安, en: Ya'an, kind: city, rank: 3, lon: 103.0, lat: 29.98}
+  - {zh: 康定, en: Kangding, kind: city, rank: 3, lon: 101.96, lat: 30.05}
+  - {zh: 澳门, en: Macao, kind: city, rank: 3, lon: 113.544, lat: 22.189}
+  - {zh: 珠峰大本营, en: Everest Base Camp, kind: city, rank: 3, lon: 86.85, lat: 28.14, approx: true}
