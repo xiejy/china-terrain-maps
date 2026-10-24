@@ -1,0 +1,100 @@
+[
+ {
+  "stem": "china",
+  "kind": "scene",
+  "name": "china",
+  "title": {
+   "zh": "中国地势",
+   "en": "The Terrain of China"
+  },
+  "src": "gallery/china_small.jpg",
+  "width": 1280,
+  "height": 720,
+  "large": "gallery/china_2560.jpg",
+  "full": "https://github.com/xiejy/china-terrain-maps/blob/main/gallery/china.jpg"
+ },
+ {
+  "stem": "himalaya-everest",
+  "kind": "scene",
+  "name": "himalaya-everest",
+  "title": {
+   "zh": "珠穆朗玛峰",
+   "en": "Qomolangma / Everest"
+  },
+  "src": "gallery/himalaya-everest_small.jpg",
+  "width": 1280,
+  "height": 720,
+  "large": "gallery/himalaya-everest_2560.jpg",
+  "full": "https://github.com/xiejy/china-terrain-maps/blob/main/gallery/himalaya-everest.jpg"
+ },
+ {
+  "stem": "hengduan-three-rivers",
+  "kind": "scene",
+  "name": "hengduan-three-rivers",
+  "title": {
+   "zh": "三江并流",
+   "en": "Three Parallel Rivers, Hengduan Mountains"
+  },
+  "src": "gallery/hengduan-three-rivers_small.jpg",
+  "width": 1280,
+  "height": 720,
+  "large": "gallery/hengduan-three-rivers_2560.jpg",
+  "full": "https://github.com/xiejy/china-terrain-maps/blob/main/gallery/hengduan-three-rivers.jpg"
+ },
+ {
+  "stem": "sichuan-basin-tibet-edge",
+  "kind": "scene",
+  "name": "sichuan-basin-tibet-edge",
+  "title": {
+   "zh": "四川盆地与青藏高原东缘",
+   "en": "Sichuan Basin and the Tibetan Plateau edge"
+  },
+  "src": "gallery/sichuan-basin-tibet-edge_small.jpg",
+  "width": 1280,
+  "height": 720,
+  "large": "gallery/sichuan-basin-tibet-edge_2560.jpg",
+  "full": "https://github.com/xiejy/china-terrain-maps/blob/main/gallery/sichuan-basin-tibet-edge.jpg"
+ },
+ {
+  "stem": "guilin-karst",
+  "kind": "scene",
+  "name": "guilin-karst",
+  "title": {
+   "zh": "桂林山水",
+   "en": "Guilin-Yangshuo karst"
+  },
+  "src": "gallery/guilin-karst_small.jpg",
+  "width": 1280,
+  "height": 720,
+  "large": "gallery/guilin-karst_2560.jpg",
+  "full": "https://github.com/xiejy/china-terrain-maps/blob/main/gallery/guilin-karst.jpg"
+ },
+ {
+  "stem": "city-chongqing-yuzhong",
+  "kind": "city",
+  "name": "chongqing-yuzhong",
+  "title": {
+   "zh": "重庆渝中半岛",
+   "en": "Chongqing, Yuzhong Peninsula"
+  },
+  "src": "gallery/city-chongqing-yuzhong_small.jpg",
+  "width": 1280,
+  "height": 720,
+  "large": "gallery/city-chongqing-yuzhong_2560.jpg",
+  "full": "https://github.com/xiejy/china-terrain-maps/blob/main/gallery/city-chongqing-yuzhong.jpg"
+ },
+ {
+  "stem": "city-hongkong-victoria-harbour",
+  "kind": "city",
+  "name": "hongkong-victoria-harbour",
+  "title": {
+   "zh": "香港维多利亚港",
+   "en": "Hong Kong, Victoria Harbour"
+  },
+  "src": "gallery/city-hongkong-victoria-harbour_small.jpg",
+  "width": 1280,
+  "height": 720,
+  "large": "gallery/city-hongkong-victoria-harbour_2560.jpg",
+  "full": "https://github.com/xiejy/china-terrain-maps/blob/main/gallery/city-hongkong-victoria-harbour.jpg"
+ }
+]

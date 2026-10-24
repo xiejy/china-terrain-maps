@@ -1,0 +1,94 @@
+[
+ {
+  "name": "chongqing-yuzhong",
+  "title": {
+   "zh": "重庆渝中半岛",
+   "en": "Chongqing, Yuzhong Peninsula"
+  },
+  "bbox": [
+   106.53,
+   29.53,
+   106.61,
+   29.59
+  ],
+  "center": [
+   106.57,
+   29.56
+  ],
+  "camera": {
+   "azimuth": 225,
+   "elevation": 26,
+   "focal_mm": 45,
+   "distance": 1.0,
+   "frame": [
+    0.25,
+    0.2,
+    0.95,
+    0.92
+   ]
+  },
+  "landmarks": [
+   {
+    "name": "Raffles City Chongqing",
+    "zh": "重庆来福士",
+    "lon": 106.584,
+    "lat": 29.5687
+   },
+   {
+    "name": "Chongqing World Financial Center",
+    "zh": "重庆环球金融中心",
+    "lon": 106.5742,
+    "lat": 29.5619
+   }
+  ],
+  "glb": true,
+  "json": true,
+  "buildings": true
+ },
+ {
+  "name": "hongkong-victoria-harbour",
+  "title": {
+   "zh": "香港维多利亚港",
+   "en": "Hong Kong, Victoria Harbour"
+  },
+  "bbox": [
+   114.135,
+   22.255,
+   114.19,
+   22.315
+  ],
+  "center": [
+   114.1625,
+   22.285
+  ],
+  "camera": {
+   "azimuth": 340,
+   "elevation": 18,
+   "focal_mm": 55,
+   "distance": 0.76,
+   "frame": [
+    0.1,
+    0.18,
+    0.9,
+    0.9
+   ]
+  },
+  "landmarks": [
+   {
+    "name": "International Commerce Centre",
+    "zh": "环球贸易广场",
+    "lon": 114.1603,
+    "lat": 22.3033
+   },
+   {
+    "name": "Two International Finance Centre",
+    "zh": "国际金融中心二期",
+    "lon": 114.1588,
+    "lat": 22.2851
+   }
+  ],
+  "glb": true,
+  "json": true,
+  "buildings": true
+ }
+]

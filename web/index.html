@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>中国地势 · The Terrain of China</title>
+    <meta name="description" content="Interactive 3D terrain map of China: colour relief, multidirectional hillshade and 3D terrain." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M2 28 L12 10 L17 18 L21 12 L30 28 Z' fill='%238c5a2b'/%3E%3Cpath d='M12 10 L15 15 L12 14 L9.5 15 Z M21 12 L23 15.5 L21 15 L19.5 16 Z' fill='%23fff'/%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <div id="map" aria-label="3D terrain map of China"></div>
+    <div id="scs-inset" class="scs-inset" role="button" title="南海诸岛 South China Sea Islands (click to view)">
+      <div class="scs-map" aria-label="South China Sea Islands inset map"></div>
+      <span class="scs-title">南海诸岛</span>
+    </div>
+    <aside id="panel" class="panel">
+      <button id="panel-toggle" class="panel-toggle" aria-expanded="true" title="Collapse panel">☰</button>
+      <header>
+        <h1><span class="zh">中国地势</span><span class="dot">·</span><span class="en">The Terrain of China</span></h1>
+        <p class="sub">分层设色 · 多向晕渲 · 三维地形 &nbsp;Colour relief, multidirectional hillshade, 3D terrain</p>
+      </header>
+      <div class="panel-body">
+        <section>
+          <h2>视角 <span>Viewpoints</span></h2>
+          <div id="scenes" class="btn-grid"><span class="muted">loading…</span></div>
+        </section>
+        <section id="gallery-section" class="hidden">
+          <h2>效果图 <span>Gallery · Blender renders</span></h2>
+          <div id="gallery-thumbs" class="thumbs"></div>
+          <button id="gallery-open" class="wide-btn">查看全部 <span id="gallery-count"></span> 张 <span class="muted">View all</span></button>
+        </section>
+        <section>
+          <h2>垂直夸张 <span>Exaggeration</span> <output id="exag-out">1.5×</output></h2>
+          <input id="exag" type="range" min="1" max="5" step="0.1" value="1.5" aria-label="Terrain exaggeration" />
+          <label class="check"><input id="terrain" type="checkbox" checked /> 三维地形 <span>3D terrain</span></label>
+        </section>
+        <section>
+          <h2>图层 <span>Layers</span></h2>
+          <div id="layers" class="checks"></div>
+          <label class="check"><input id="english" type="checkbox" checked /> 英文名 <span>English names</span></label>
+        </section>
+        <section>
+          <h2>设色 <span>Relief palette</span></h2>
+          <div id="palette" class="seg"></div>
+        </section>
+        <section>
+          <h2>高程数据 <span>Elevation data</span></h2>
+          <div id="dem" class="seg"></div>
+          <p id="dem-status" class="muted small"></p>
+        </section>
+        <section>
+          <h2>三维城市 <span>3D cities</span></h2>
+          <div id="cities" class="links"><span class="muted">loading…</span></div>
+        </section>
+        <section class="legend">
+          <div id="legend-bar" class="legend-bar"></div>
+          <div id="legend-ticks" class="legend-ticks"></div>
+        </section>
+      </div>
+    </aside>
+    <div id="gallery" class="gallery hidden" role="dialog" aria-modal="true" aria-label="Gallery of 3D terrain renders">
+      <div class="g-panel">
+        <header class="g-head">
+          <h2>效果图 <span>Gallery · Blender Cycles renders</span></h2>
+          <button class="g-close" title="Close (Esc)" aria-label="Close gallery">✕</button>
+        </header>
+        <div class="g-body"></div>
+      </div>
+    </div>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>

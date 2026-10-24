@@ -1,0 +1,118 @@
+{
+ "name": "chongqing-yuzhong",
+ "title": {
+  "zh": "重庆渝中半岛",
+  "en": "Chongqing, Yuzhong Peninsula"
+ },
+ "epsg": 32648,
+ "bbox": [
+  106.53,
+  29.53,
+  106.61,
+  29.59
+ ],
+ "origin": [
+  648170.0,
+  3267680.0
+ ],
+ "bounds_proj": [
+  648170.0,
+  3267680.0,
+  656020.0,
+  3274440.0
+ ],
+ "extent_m": [
+  7850.0,
+  6760.0
+ ],
+ "terrain_res": 5.0,
+ "texture_res": 2.0,
+ "terrain_shape": [
+  1353,
+  1571
+ ],
+ "texture_shape": [
+  3380,
+  3925
+ ],
+ "n_buildings": 13672,
+ "n_parts": 28,
+ "height_source_counts": {
+  "gba": 7835,
+  "default": 5511,
+  "overture_floors": 267,
+  "overture_height": 59
+ },
+ "height_max": 350.0,
+ "z_min": 161.13731384277344,
+ "z_max": 616.09619140625,
+ "terrain_z": [
+  161.42771911621094,
+  605.446533203125
+ ],
+ "landmarks": [
+  {
+   "name": "Raffles City Chongqing",
+   "lon": 106.584,
+   "lat": 29.5687,
+   "e": 653439.5236486923,
+   "n": 3272042.1909796456,
+   "local": [
+    5269.52,
+    199.82,
+    -4362.19
+   ],
+   "height": 350.0,
+   "top_z": 548.1282958984375,
+   "height_source": "overture_height"
+  },
+  {
+   "name": "Chongqing World Financial Center",
+   "lon": 106.5742,
+   "lat": 29.5619,
+   "e": 652500.308368936,
+   "n": 3271275.6826745374,
+   "local": [
+    4330.31,
+    277.36,
+    -3595.68
+   ],
+   "height": 340.0,
+   "top_z": 616.0961608886719,
+   "height_source": "overture_height"
+  }
+ ],
+ "camera": {
+  "azimuth": 225,
+  "elevation": 26,
+  "focal_mm": 45,
+  "distance": 1.0,
+  "frame": [
+   0.25,
+   0.2,
+   0.95,
+   0.92
+  ]
+ },
+ "sun": {
+  "azimuth": 300,
+  "elevation": 22,
+  "strength": 4.0,
+  "angle": 0.8
+ },
+ "sources": {
+  "overture_release": "2026-10-21.0",
+  "gba_tile": "e105_n30_e110_n25.parquet",
+  "dtm": "GEDTM30",
+  "sentinel2": {
+   "year": 2025,
+   "quarter": "Q4",
+   "tiles": [
+    "48RXT_0_0"
+   ]
+  }
+ },
+ "attribution": "© OpenStreetMap contributors (ODbL), via Overture Maps Foundation; Shi et al. 2023, A First High-quality Vector Data of Buildings in East Asian Countries, doi:10.5281/zenodo.8174931 (CC BY 4.0, via Overture); GlobalBuildingAtlas LoD1 (CC BY-NC 4.0, non-commercial); GEDTM30 (OpenLandMap, CC BY 4.0); contains modified Copernicus Sentinel data",
+ "license_note": "non-commercial (GlobalBuildingAtlas CC BY-NC 4.0)",
+ "build_seconds": 33.1
+}

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>三维城市 · 3D City</title>
+    <meta name="description" content="3D city model on terrain: building extrusions and a glTF viewer." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M3 29V17h5V9h6v20M14 29V4h7v25M21 29V13h8v16' fill='%23c9583f'/%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <div id="map" aria-label="City map with 3D buildings"></div>
+    <div id="three" class="hidden" aria-label="3D city model viewer"></div>
+    <div id="notice" class="notice hidden" role="status"></div>
+    <aside id="panel" class="panel">
+      <button id="panel-toggle" class="panel-toggle" aria-expanded="true" title="Collapse panel">☰</button>
+      <header>
+        <h1><span class="zh" id="title-zh">三维城市</span><span class="en" id="title-en">3D City</span></h1>
+        <p class="sub" id="subtitle">LoD1 buildings on terrain</p>
+      </header>
+      <div class="panel-body">
+        <section>
+          <div class="toolbar" id="toolbar">
+            <button id="view-map" data-view="map">地图 <span class="muted">Map</span></button>
+            <button id="view-3d" data-view="3d">三维模型 <span class="muted">3D model</span></button>
+            <a href="./index.html">← 中国地势</a>
+          </div>
+        </section>
+        <section class="info" id="info"><span class="muted">loading…</span></section>
+        <section>
+          <h2>其他城市 <span>Other cities</span></h2>
+          <div id="cities" class="links"></div>
+        </section>
+      </div>
+    </aside>
+    <script type="module" src="./src/city.ts"></script>
+  </body>
+</html>

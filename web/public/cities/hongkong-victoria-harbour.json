@@ -1,0 +1,118 @@
+{
+ "name": "hongkong-victoria-harbour",
+ "title": {
+  "zh": "香港维多利亚港",
+  "en": "Hong Kong, Victoria Harbour"
+ },
+ "epsg": 32650,
+ "bbox": [
+  114.135,
+  22.255,
+  114.19,
+  22.315
+ ],
+ "origin": [
+  204710.0,
+  2463740.0
+ ],
+ "bounds_proj": [
+  204710.0,
+  2463740.0,
+  210520.0,
+  2470500.0
+ ],
+ "extent_m": [
+  5810.0,
+  6760.0
+ ],
+ "terrain_res": 5.0,
+ "texture_res": 2.0,
+ "terrain_shape": [
+  1353,
+  1163
+ ],
+ "texture_shape": [
+  3380,
+  2905
+ ],
+ "n_buildings": 11954,
+ "n_parts": 1063,
+ "height_source_counts": {
+  "overture_floors": 5154,
+  "gba": 4780,
+  "default": 1344,
+  "overture_height": 676
+ },
+ "height_max": 484.0,
+ "z_min": -1.0872454643249512,
+ "z_max": 547.7931518554688,
+ "terrain_z": [
+  0.6000000238418579,
+  536.498046875
+ ],
+ "landmarks": [
+  {
+   "name": "International Commerce Centre",
+   "lon": 114.1603,
+   "lat": 22.3033,
+   "e": 207425.28488756198,
+   "n": 2469151.747855653,
+   "local": [
+    2715.28,
+    12.98,
+    -5411.75
+   ],
+   "height": 484.0,
+   "top_z": 490.6780481338501,
+   "height_source": "overture_height"
+  },
+  {
+   "name": "Two International Finance Centre",
+   "lon": 114.1588,
+   "lat": 22.2851,
+   "e": 207232.6861108386,
+   "n": 2467138.3252253155,
+   "local": [
+    2522.69,
+    10.96,
+    -3398.33
+   ],
+   "height": 415.8,
+   "top_z": 422.8567750930786,
+   "height_source": "overture_height"
+  }
+ ],
+ "camera": {
+  "azimuth": 340,
+  "elevation": 18,
+  "focal_mm": 55,
+  "distance": 0.76,
+  "frame": [
+   0.1,
+   0.18,
+   0.9,
+   0.9
+  ]
+ },
+ "sun": {
+  "azimuth": 235,
+  "elevation": 13,
+  "strength": 4.0,
+  "angle": 0.8
+ },
+ "sources": {
+  "overture_release": "2026-10-21.0",
+  "gba_tile": "e110_n25_e115_n20.parquet",
+  "dtm": "GEDTM30",
+  "sentinel2": {
+   "year": 2026,
+   "quarter": "Q1",
+   "tiles": [
+    "50QKK_0_0"
+   ]
+  }
+ },
+ "attribution": "© OpenStreetMap contributors (ODbL), via Overture Maps Foundation; Shi et al. 2023, A First High-quality Vector Data of Buildings in East Asian Countries, doi:10.5281/zenodo.8174931 (CC BY 4.0, via Overture); GlobalBuildingAtlas LoD1 (CC BY-NC 4.0, non-commercial); GEDTM30 (OpenLandMap, CC BY 4.0); contains modified Copernicus Sentinel data",
+ "license_note": "non-commercial (GlobalBuildingAtlas CC BY-NC 4.0)",
+ "build_seconds": 22.5
+}

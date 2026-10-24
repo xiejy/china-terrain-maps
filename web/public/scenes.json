@@ -1,0 +1,107 @@
+[
+ {
+  "name": "china",
+  "title": {
+   "zh": "中国地势",
+   "en": "The Terrain of China"
+  },
+  "bounds": [
+   70.0,
+   2.0,
+   140.0,
+   56.0
+  ],
+  "center": [
+   105.0,
+   32.96418
+  ],
+  "zoom": 3.09,
+  "bearing": 345.0,
+  "pitch": 55.0,
+  "exaggeration": 5.0
+ },
+ {
+  "name": "himalaya-everest",
+  "title": {
+   "zh": "珠穆朗玛峰",
+   "en": "Qomolangma / Everest"
+  },
+  "bounds": [
+   86.45,
+   27.7,
+   87.3,
+   28.35
+  ],
+  "center": [
+   86.875,
+   28.02549
+  ],
+  "zoom": 9.58,
+  "bearing": 195.0,
+  "pitch": 70.0,
+  "exaggeration": 1.5
+ },
+ {
+  "name": "hengduan-three-rivers",
+  "title": {
+   "zh": "三江并流",
+   "en": "Three Parallel Rivers, Hengduan Mountains"
+  },
+  "bounds": [
+   98.2,
+   26.6,
+   100.2,
+   28.6
+  ],
+  "center": [
+   99.2,
+   27.60456
+  ],
+  "zoom": 7.96,
+  "bearing": 0.0,
+  "pitch": 55.0,
+  "exaggeration": 2.5
+ },
+ {
+  "name": "sichuan-basin-tibet-edge",
+  "title": {
+   "zh": "四川盆地与青藏高原东缘",
+   "en": "Sichuan Basin and the Tibetan Plateau edge"
+  },
+  "bounds": [
+   100.5,
+   27.5,
+   108.5,
+   33.0
+  ],
+  "center": [
+   104.5,
+   30.28853
+  ],
+  "zoom": 6.46,
+  "bearing": 285.0,
+  "pitch": 70.0,
+  "exaggeration": 3.5
+ },
+ {
+  "name": "guilin-karst",
+  "title": {
+   "zh": "桂林山水",
+   "en": "Guilin-Yangshuo karst"
+  },
+  "bounds": [
+   110.3,
+   24.65,
+   110.62,
+   24.95
+  ],
+  "center": [
+   110.46,
+   24.80009
+  ],
+  "zoom": 10.73,
+  "bearing": 340.0,
+  "pitch": 70.0,
+  "exaggeration": 1.8
+ }
+]
