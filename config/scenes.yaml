@@ -6,16 +6,29 @@
 #   glo30      -> Copernicus GLO-30 full resolution (1")
 #   glo30-ovr2 -> GLO-30 overview level 2 (8", ~240 m)
 #   glo90      -> Copernicus GLO-90 full resolution (3")
-# dem_res / texture_res: output pixel size in metres.
+# dem_res / texture_res: output pixel size in metres (dem_res must be a multiple of
+#   texture_res; regional textures are 2-3x finer than the DEM so lines stay crisp).
 # camera.azimuth: compass bearing FROM the scene centre TO the camera (deg).
 # camera.elevation: degrees above horizontal the camera looks down.
-# sun.azimuth: compass bearing the light comes FROM; sun.elevation in degrees.
+# camera.frame (optional): region the camera fits instead of the whole slab, as fractions of the
+#   scene from its SW corner: [x0, y0, x1, y1] or a polygon [[x, y], ...]; the rest may leave the frame.
+# exposure_bias: stops above "flat ground shows its texture colour" (renderer default 0.25).
+# grade: {saturation, contrast} colour grade applied to the render (not the background).
+# sun.azimuth: compass bearing the light comes FROM; sun.elevation in degrees; sun.color (RGB 0-1).
+# sky: {strength, saturation} of the physical-sky fill light (more saturation = cooler shadows).
+# haze_color: sRGB of the aerial-perspective haze.
+# dem_smooth_px: Gaussian smoothing (mesh vertices) of the rendered relief; dem_sharpen: {sigma, amount}
+#   unsharp mask of it. Both shape the mesh only; the texture shading comes from the full DEM.
+# Texture keys (need `chinamaps scene <name>`): palette (override of config/palettes.yaml), line_scale
+#   (all vector weights), river_scale / border_scale (extra factors), river_color, river_max_m (cap on
+#   the true width of DEM-traced rivers), border_glow {width, alpha}, borders (false = no boundaries).
 defaults:
   mesh_max: 2048          # longest mesh side in vertices (Blender decimates the DEM to this)
   draft: {width: 1600, height: 900, samples: 32}
   final: {width: 3840, height: 2160, samples: 128}
   sun: {strength: 4.0, angle: 1.0}
   haze: 0.2               # mist pass mix (0 = none)
+  grade: {saturation: 1.2, contrast: 0.2}
   bathymetry: false
   worldview: cn
 
@@ -28,48 +41,114 @@ scenes:
     dem_res: 1000
     texture_res: 500
     bathymetry: true
+    highlight_china: true
+    line_scale: 1.7         # border, dash and river weights x1.7: the oblique 4K view foreshortens the texture
+    border_scale: 1.4       # China's border and the dashes x2.4 in all, so they hold at README size
+    border_glow: {width: 6, alpha: 0.35}  # warm outer glow under China's land border
     exaggeration: 20
-    mesh_max: 3000
-    camera: {azimuth: 155, elevation: 34, focal_mm: 50, distance: 1.15}
-    sun: {azimuth: 285, elevation: 20, strength: 4.5, angle: 1.5}
-    haze: 0.25
+    bathy_scale: 0.22       # sea floor at 0.22 x the land exaggeration
+    dem_smooth_px: 1.5      # ~4 km mesh vertices: smoothing turns the needle field back into ranges
+    mesh_max: 2600          # ~3.5 GB peak RSS in Blender
+    # frame: hull of China + the South China Sea dashes, so the slab's ocean corners may leave the picture
+    camera:
+      azimuth: 165
+      elevation: 35
+      focal_mm: 50
+      distance: 1.0
+      frame: [[0.60, 0.005], [0.53, 0.05], [0.19, 0.53], [0.16, 0.72], [0.33, 0.86], [0.65, 0.94], [0.79, 0.86],
+              [0.72, 0.18], [0.66, 0.02]]
+    # light from the upper left of the picture models the E-W Himalaya, Kunlun and Tian Shan
+    sun: {azimuth: 290, elevation: 25, strength: 4.5, angle: 1.5}
+    haze: 0.18
+    exposure_bias: 0.1
   himalaya-everest:
     title: {zh: 珠穆朗玛峰, en: Qomolangma / Everest}
     bounds: [86.45, 27.70, 87.30, 28.35]
     crs: "EPSG:32645"
     dem: glo30
     dem_res: 30
-    texture_res: 30
+    texture_res: 15
+    borders: false          # Natural Earth's China-Nepal line misses the Everest summit by >1 km at this scale
     exaggeration: 1.5
-    camera: {azimuth: 190, elevation: 26, focal_mm: 50, distance: 1.1}
-    sun: {azimuth: 235, elevation: 24, strength: 4.0, angle: 1.0}
+    # the dry Tibetan side is bare scree below ~6100 m (north faces hold snow ~300 m lower)
+    palette:
+      land:
+        shared_high:
+          - [7000, 238, 236, 234]
+          - [6000, 206, 188, 164]
+          - [5200, 194, 170, 142]
+          - [4500, 180, 150, 114]
+          - [3500, 186, 153, 110]
+          - [2500, 202, 170, 116]
+          - [1500, 218, 196, 138]
+          - [1000, 222, 209, 152]
+      snow: {line_by_lat: [[26, 6000], [28, 6100], [30, 6150]], aspect_m: 300}
+    # from the Tibetan side: the Rongbuk valley leads to the north face; a long lens on the summit
+    camera: {azimuth: 15, elevation: 20, focal_mm: 85, distance: 1.0, frame: [0.40, 0.33, 0.72, 0.64]}
+    # low warm sun, cool sky fill: warm summits, blue shadows
+    sun: {azimuth: 290, elevation: 14, strength: 4.0, angle: 1.0, color: [1.0, 0.90, 0.78]}
+    sky: {strength: 0.15, saturation: 0.75}
+    haze: 0.3
+    exposure_bias: -1.3     # a 14 deg sun: exposure matched to flat ground would blow out sunlit slopes
+    grade: {saturation: 1.5, contrast: 0.25}  # tan scree against white snow, not a monochrome massif
   hengduan-three-rivers:
-    title: {zh: 三江并流, en: Three Parallel Rivers, Hengduan Mountains}
+    title: {zh: 三江并流, en: "Three Parallel Rivers, Hengduan Mountains"}
     bounds: [98.2, 26.6, 100.2, 28.6]
     crs: "EPSG:32647"
     dem: glo90
     dem_res: 90
-    texture_res: 90
+    texture_res: 45
+    line_scale: 2.0
+    river_scale: 1.5        # rivers x3 in all, so the three gorges read in the oblique view
+    river_color: [90, 175, 235]
+    palette:
+      snow: {humid_drop_m: 1100, aspect_m: 250}   # monsoon snowline ~4900 m at 28 N: Baima and Meili carry snow
+      forest: {color: [44, 112, 80], amount: 0.35}
     exaggeration: 2.5
-    camera: {azimuth: 180, elevation: 35, focal_mm: 45, distance: 1.15}
-    sun: {azimuth: 250, elevation: 22, strength: 4.0, angle: 1.0}
+    # looking north up the three gorges at their closest (27.4-28.6 N); the slab bleeds past both sides
+    camera: {azimuth: 180, elevation: 35, focal_mm: 60, distance: 1.0, frame: [0.12, 0.40, 0.88, 1.0]}
+    sun: {azimuth: 260, elevation: 22, strength: 4.0, angle: 1.0}
+    exposure_bias: 0.42      # brighter than the old 0.35 (dark olive), short of clipping sunlit slopes
   sichuan-basin-tibet-edge:
     title: {zh: 四川盆地与青藏高原东缘, en: Sichuan Basin and the Tibetan Plateau edge}
     bounds: [100.5, 27.5, 108.5, 33.0]
     crs: "EPSG:32648"
     dem: glo30-ovr2
     dem_res: 240
-    texture_res: 240
-    exaggeration: 4
-    camera: {azimuth: 105, elevation: 30, focal_mm: 50, distance: 1.1}
-    sun: {azimuth: 260, elevation: 18, strength: 4.5, angle: 1.2}
+    texture_res: 120
+    line_scale: 1.5
+    # a calmer basin floor: less saturated lowland greens
+    palette:
+      land:
+        warm_humid:
+          - [600, 178, 199, 134]
+          - [200, 140, 176, 112]
+          - [50, 126, 168, 106]
+          - [0, 118, 160, 100]
+          - [-400, 110, 150, 94]
+    exaggeration: 3.5
+    dem_smooth_px: 1.0
+    grade: {saturation: 1.05, contrast: 0.2}
+    # low view from the ESE across the basin floor to the plateau wall
+    camera: {azimuth: 105, elevation: 20, focal_mm: 50, distance: 1.0, frame: [0.15, 0.14, 0.94, 0.95]}
+    sun: {azimuth: 210, elevation: 20, strength: 4.5, angle: 1.2}
   guilin-karst:
     title: {zh: 桂林山水, en: Guilin-Yangshuo karst}
     bounds: [110.30, 24.65, 110.62, 24.95]
     crs: "EPSG:32649"
     dem: glo30
     dem_res: 30
-    texture_res: 30
-    exaggeration: 2
-    camera: {azimuth: 150, elevation: 22, focal_mm: 40, distance: 1.0}
-    sun: {azimuth: 255, elevation: 20, strength: 4.0, angle: 1.0}
+    texture_res: 10
+    # dark forested towers over pale paddy and village valley floors; a jade Li River ~120 m wide
+    palette:
+      slope_tint: {steep: [48, 96, 58], flat: [176, 192, 124], deg: [6, 20]}
+    river_color: [88, 150, 140]
+    river_max_m: 120
+    exaggeration: 1.8
+    dem_sharpen: {sigma: 3, amount: 0.8}   # steepen the 30 m DEM's rounded cones toward fenglin pillars
+    # up the Li River from the south-east; a low sun and haze layer the karst towers
+    camera: {azimuth: 160, elevation: 20, focal_mm: 50, distance: 1.0, frame: [0.38, 0.22, 0.90, 0.92]}
+    sun: {azimuth: 255, elevation: 10, strength: 4.0, angle: 1.0}
+    haze: 0.32
+    haze_color: [224, 226, 226]
+    grade: {saturation: 1.0, contrast: 0.2}

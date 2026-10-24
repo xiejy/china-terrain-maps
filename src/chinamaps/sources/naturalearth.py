@@ -113,7 +113,7 @@ def boundary_lines(worldview: str = "cn", bbox: tuple[float, float, float, float
             edge = linemerge_any(edge)
             if edge is not None and not edge.is_empty and edge.length > 0:
                 rows.append({"a": code, "b": codes[j], "china": "CHN" in (code, codes[j]), "geometry": edge})
-    gdf = gpd.GeoDataFrame(rows, geometry="geometry", crs=4326)
+    gdf = gpd.GeoDataFrame(rows, columns=["a", "b", "china", "geometry"], geometry="geometry", crs=4326)
     return gdf.clip(bbox) if bbox else gdf
 
 

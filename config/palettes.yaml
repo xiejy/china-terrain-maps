@@ -1,34 +1,53 @@
 # Hypsometric colour stops: [elevation_m, R, G, B].
-# Land: Patterson & Jenny cross-blended hypsometric tints (via tidyterra
-# data-raw/cross_blended_hypsometric_tints_db.R). Stops above 1000 m are shared;
-# lowland colours vary by climate and are blended with a smoothed regional mask.
+# Land: cross-blended hypsometric tints after Patterson & Jenny (tidyterra
+# data-raw/cross_blended_hypsometric_tints_db.R), re-saturated for oblique
+# renders: greener lowlands, ochre uplands, a warm brown plateau. Stops above
+# 1000 m are shared; lowland colours vary by climate and are blended with a
+# smoothed regional mask. Snow above a latitude-dependent snowline and darker
+# forest on humid slopes are added in chinamaps.tint (see `snow` / `forest`).
+# A scene may override any part of this file with a `palette:` block in config/scenes.yaml
+# (dicts are merged, lists such as colour stops are replaced whole).
 land:
   shared_high:
-    - [7000, 245, 245, 245]
-    - [6000, 235, 235, 237]
-    - [5000, 220, 220, 220]
-    - [4000, 212, 207, 204]
-    - [3000, 212, 193, 179]
-    - [2000, 212, 184, 163]
-    - [1000, 212, 201, 180]
+    - [7000, 250, 250, 252]
+    - [6000, 236, 233, 230]
+    - [5200, 194, 170, 142]
+    - [4500, 180, 150, 114]
+    - [3500, 186, 153, 110]
+    - [2500, 202, 170, 116]
+    - [1500, 218, 196, 138]
+    - [1000, 222, 209, 152]
   arid:
-    - [600, 202, 190, 174]
-    - [200, 180, 170, 158]
-    - [50, 170, 160, 150]
-    - [0, 160, 152, 141]
-    - [-400, 146, 136, 129]
+    - [600, 222, 206, 162]
+    - [200, 216, 198, 156]
+    - [50, 208, 190, 150]
+    - [0, 200, 182, 146]
+    - [-400, 186, 166, 134]
   warm_humid:
-    - [600, 169, 192, 166]
-    - [200, 134, 184, 159]
-    - [50, 120, 172, 149]
-    - [0, 114, 164, 141]
-    - [-400, 106, 153, 135]
+    - [600, 178, 199, 134]
+    - [200, 128, 182, 114]
+    - [50, 104, 168, 104]
+    - [0, 94, 160, 100]
+    - [-400, 86, 148, 94]
   cold_humid:
-    - [600, 180, 192, 180]
-    - [200, 145, 177, 171]
-    - [50, 130, 165, 159]
-    - [0, 120, 159, 152]
-    - [-400, 112, 147, 141]
+    - [600, 188, 201, 146]
+    - [200, 146, 186, 128]
+    - [50, 124, 174, 120]
+    - [0, 114, 166, 116]
+    - [-400, 104, 154, 108]
+
+# Snow and ice above a snowline interpolated from line_by_lat ([lat, m]: highest
+# over the dry Tibetan interior, lower toward the Tianshan and Altai), minus
+# humid_drop_m in the monsoon south-east, and lower by up to aspect_m on north-facing slopes;
+# fades in over fade_m and is suppressed on slopes steeper than ~steep_deg.
+snow:
+  color: [246, 248, 252]
+  line_by_lat: [[20, 5300], [28, 5750], [32, 5950], [36, 5400], [40, 4600], [44, 3950], [50, 3150]]
+  humid_drop_m: 600
+  fade_m: 700
+  steep_deg: 45
+# Humid slopes read as darker forest (mixed toward color by up to amount).
+forest: {color: [58, 106, 62], amount: 0.48, slope_deg: [4, 24], top_m: [3400, 4400]}
 
 # Climate regions used to build blend weights (lon/lat polygons, coarse on
 # purpose: the mask is Gaussian-smoothed with sigma ~150 km). Anything not
@@ -51,8 +70,9 @@ ocean:
   - [-6000, 48, 78, 110]
   - [-11000, 32, 52, 80]
 
-# Neighbouring countries are drawn with land colours mixed toward this grey.
-neighbour_mix: {color: [196, 196, 192], amount: 0.45}
+# Neighbouring countries are drawn with land colours mixed toward this grey, then lightened, so
+# China stands out on the national map.
+neighbour_mix: {color: [196, 196, 192], amount: 0.62, lighten: 0.06}
 
 # Web map colour-relief stops (MapLibre color-relief, elevation in metres).
 web_color_relief:
