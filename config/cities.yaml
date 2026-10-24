@@ -1,34 +1,58 @@
 # 3D city presets. bbox: [lon_min, lat_min, lon_max, lat_max] (WGS84).
 # epsg: metric working CRS. gba_tile: GlobalBuildingAtlas LoD1 parquet tile.
 # s2_mgrs: Sentinel-2 quarterly mosaic tile id(s) covering the bbox (null =
-# resolve via bucket listing).
+# resolve via bucket listing). s2_quarter (optional, e.g. "2026-Q1") pins the
+# mosaic quarter; otherwise the most recent clean one is chosen automatically.
+# gba_footprints: replace machine-learned Overture footprints (no height
+# attributes) with GlobalBuildingAtlas footprints, which match the imagery
+# better where OSM coverage is thin. Landmark lon/lat are WGS84 (not GCJ-02).
+# min_footprint_m2: footprints smaller than this are dropped (ML specks on wooded slopes, kiosks).
+# drop_vegetated: also drop small non-OSM footprints whose imagery is green canopy (excess-green index).
+# water: ground-texture tint inside Overture water polygons {color, alpha, sand} (sand: paint exposed
+#   river bed, i.e. warm imagery inside the polygons, as wet sand).
+# Render-only keys (blender/render_city.py): camera, sun, grade, exposure_bias, water_roughness.
 defaults:
   terrain_res: 5            # m, ground mesh grid spacing
   texture_res: 2            # m/px, ground texture
   floor_height: 3.2         # m per floor when only num_floors is known
   gba_min_overlap: 0.5      # min footprint overlap fraction for a GBA height match
+  gba_footprints: false
   default_heights: {residential: 18, commercial: 24, industrial: 12, default: 12, small_area_m2: 60, small: 6}
+  min_footprint_m2: 30
+  drop_vegetated: {exg: 0.2, max_area_m2: 150}   # non-OSM footprints this small under green canopy
+  water: {color: [38, 86, 124], alpha: 0.45, sand: true}
+  grade: {saturation: 1.1, contrast: 0.15}   # render-only colour grade (blender/render_city.py)
 
 cities:
   chongqing-yuzhong:
-    title: {zh: 重庆渝中半岛, en: Chongqing, Yuzhong Peninsula}
+    title: {zh: 重庆渝中半岛, en: "Chongqing, Yuzhong Peninsula"}
     bbox: [106.53, 29.53, 106.61, 29.59]
     epsg: 32648
     gba_tile: e105_n30_e110_n25.parquet
     s2_mgrs: [48RXT]
+    gba_footprints: true
+    # Yuzhong is mostly 20-35 floor towers: unattributed footprints default taller than elsewhere
+    default_heights: {residential: 30, commercial: 45, default: 21}
     landmarks:
-      - {name: Raffles City Chongqing, lon: 106.5866, lat: 29.5655}
-      - {name: Chongqing World Financial Center, lon: 106.5767, lat: 29.5594}
-    camera: {azimuth: 225, elevation: 32, focal_mm: 35, distance: 0.9}
-    sun: {azimuth: 250, elevation: 18, strength: 4.0, angle: 0.8}
+      - {name: Raffles City Chongqing, lon: 106.5840, lat: 29.5687}
+      - {name: Chongqing World Financial Center, lon: 106.5742, lat: 29.5619}
+    # along the peninsula from the SW to the Chaotianmen tip; frame (fractions of the bbox from its SW
+    # corner) fits the peninsula and both rivers, letting the outer districts leave the picture
+    camera: {azimuth: 225, elevation: 26, focal_mm: 45, distance: 1.0, frame: [0.25, 0.2, 0.95, 0.92]}
+    sun: {azimuth: 300, elevation: 22, strength: 4.0, angle: 0.8}
   hongkong-victoria-harbour:
-    title: {zh: 香港维多利亚港, en: Hong Kong, Victoria Harbour}
-    bbox: [114.14, 22.27, 114.19, 22.315]
+    title: {zh: 香港维多利亚港, en: "Hong Kong, Victoria Harbour"}
+    bbox: [114.135, 22.255, 114.19, 22.315]   # south edge includes the Peak, High West and Mt Cameron
     epsg: 32650
     gba_tile: e110_n25_e115_n20.parquet
     s2_mgrs: null
+    water: {color: [32, 70, 96], alpha: 0.92, sand: false}   # flat harbour: hides the smeared S2 boats
+    water_roughness: 0.08
     landmarks:
       - {name: International Commerce Centre, lon: 114.1603, lat: 22.3033}
       - {name: Two International Finance Centre, lon: 114.1588, lat: 22.2851}
-    camera: {azimuth: 345, elevation: 28, focal_mm: 35, distance: 0.9}
-    sun: {azimuth: 240, elevation: 20, strength: 4.0, angle: 0.8}
+    # from Kowloon across the harbour: ICC in front, the Central skyline against the Peak
+    camera: {azimuth: 340, elevation: 18, focal_mm: 55, distance: 0.76, frame: [0.1, 0.18, 0.9, 0.9]}
+    # golden-hour side/back light from the SW: rim-lit towers, long shadows toward the viewer
+    sun: {azimuth: 235, elevation: 13, strength: 4.0, angle: 0.8}
+    exposure_bias: -0.3
